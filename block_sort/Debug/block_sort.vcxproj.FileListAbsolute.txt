@@ -1,2 +1,0 @@
-E:\C_C++_C#\C++\Projects\block_sort\Debug\block_sort.exe
-E:\C_C++_C#\C++\Projects\block_sort\Debug\block_sort.pdb

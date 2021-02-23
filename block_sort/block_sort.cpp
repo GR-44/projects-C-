@@ -6,8 +6,9 @@ using namespace std;
 int main()
 {
     vector<int> v;
-    for (int i = 0; i < 2000; ++i)
-        v.push_back(rand() % 100 - 50);
+    srand(time(0));
+    for (int i = 0; i < 5000; ++i)
+        v.push_back(rand() % 100000 - 3000);
 
     for (auto x : v)
     {
