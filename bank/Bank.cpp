@@ -22,7 +22,7 @@ int main()
     cout << "Balance after debit: $" << clients[0]->getBalance() << endl;
     cout << endl;
 
-    cout << "Client 2:" << endl;
+    cout << "Client 3:" << endl;
     cout << "Balance: $" << clients[2]->getBalance() << endl;;
     clients[2]->credit(500);
     cout << "Balance after credit: $" << clients[2]->getBalance() << endl;
