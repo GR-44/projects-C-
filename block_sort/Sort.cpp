@@ -1,9 +1,11 @@
-#include "Sort.h"
 #include <vector>
+#include "Sort.h"
+#include "time_calculation.h"
 using namespace std;
 
 void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
 {
+    Timer t;
     // create 2 arrays for negative and positive integers of origin array
     vector<int> pos;
     vector<int> neg;
@@ -17,13 +19,7 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
 
     // ======================= sorting negative numbers ================================
     // create two-dimentional array
-    vector<vector<int>> neg_nums(10);
-    for (int i = 0; i < 10; ++i)
-    {
-        neg_nums[i].resize(neg.size());
-        for (int j = 0; j < neg.size(); ++j)
-            neg_nums[i][j] = 0;
-    }
+    vector<vector<int>> neg_nums(10, vector<int>(neg.size(), 0));
 
     // define min nagative integer
     int min_number = min_num(neg);
@@ -68,14 +64,8 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
 
     //================================= sorting positive numbers ==============================================
     // create two-dimentional array
-    vector<vector<int>> pos_nums(10);
-    for (int i = 0; i < 10; ++i)
-    {
-        pos_nums[i].resize(pos.size());
-        for (int j = 0; j < pos.size(); ++j)
-            pos_nums[i][j] = -1;
-    }
-
+    vector<vector<int>> pos_nums(10, vector<int>(pos.size(), -1));
+   
     // define max positive integer
     int max_number = max_num(pos);
 
@@ -127,7 +117,7 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
 int Sort::numpos(int number)                              // define a count of positions of integer
 {
     int count = 0;
-    if (number < 0)
+    if(number < 0)
     {
         number = -number;
     }
@@ -164,25 +154,23 @@ int Sort::max_num(std::vector<int>& v)                   // define max positive 
     return max_number;
 }
 
-void bubble_sort(vector<int>& v)                   // bubble sort
+void Sort::bubble_sort(std::vector<int>& v)                   // bubble sort
 {
-    int temp;
-    bool swapped;
-
-    do
+    Timer t;
+    
+    int i, j, temp;
+    for (i = 0; i < v.size(); i++)
     {
-        swapped = false;
-        for (int i = 0; i < v.size(); i++)
+        for (j = 0; j < (v.size() - i - 1); j++)
         {
-            if (v[i + 1] < v[i])
+            if (v[j] > v[j + 1])
             {
-                temp = v[i];
-                v[i] = v[i + 1];
-                v[i + 1] = temp;
-                swapped = true;
+                temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
             }
         }
-    } while (swapped);
+    }
 }
 
 
