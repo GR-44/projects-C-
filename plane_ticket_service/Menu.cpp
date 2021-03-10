@@ -132,13 +132,13 @@ bool Menu::checkFullFill(string class_ticket) const
 
 			if (check_fill_seats == 5)
 			{
-				return true;
 				f.close();
+				return true;
 			}
 			else
 			{
-				return false;
 				f.close();
+				return false;
 			}
 		}
 	}
@@ -168,13 +168,13 @@ bool Menu::checkFullFill(string class_ticket) const
 
 			if (check_fill_seats == 5)
 			{
-				return true;
 				f.close();
+				return true;
 			}
 			else
 			{
-				return false;
 				f.close();
+				return false;
 			}
 		}
 	}
@@ -200,13 +200,13 @@ bool Menu::is_Busy(int choice)
 
 		if (seat == BUSY)
 		{
-			return true;
 			f.close();
+			return true;
 		}
 		else
 		{
-			return false;
 			f.close();
+			return false;
 		}
 	}
 }

@@ -72,7 +72,6 @@ int main()
                 }
                 b.setSeat(seat);
 
-
                 system("cls");
                 b.printBusinessClassTicket();
                 cout << endl;
