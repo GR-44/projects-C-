@@ -61,13 +61,13 @@ bool Econom::checkSeat(int choice)
 
         if (seat == VACANT)
         {
-            return true;
             f.close();
+            return true;
         }
         else
         {
-            return false;
             f.close();
+            return false;
         }
     }
 }

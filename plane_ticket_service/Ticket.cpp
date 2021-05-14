@@ -19,7 +19,7 @@ string Ticket::check_str(const string& s)
 {
 	string temp = "";
 	if (s.length() < 25)
-		temp += s;
+		return s;
 	else
 	{
 		for (int i = 0; i < 25; ++i)
@@ -107,23 +107,5 @@ int Ticket::checkYear(int year)const
 		year = 1900;
 	return year;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
