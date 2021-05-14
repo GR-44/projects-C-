@@ -33,9 +33,9 @@ int main()
     cout << "===========================================================" << endl;
 
     Sort a;
-    // block sorting and calculation of runtime 
+    // bucketsort and calculation of runtime 
     a.bucketsort(v1);
-    // bubble sorting and calculation of runtime
+    // quicksort and calculation of runtime
     {
         Timer t;
         a.quicksort(v2, 0, v2.size());
