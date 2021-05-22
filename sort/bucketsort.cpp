@@ -32,6 +32,9 @@ int main()
     cout << "v2: ";
     print_arr(v2, step);
     cout << endl << endl;
+	cout << "v3: ";
+    print_arr(v3, step);
+    cout << endl << endl;
     
     cout << "===========================================================" << endl;
 
