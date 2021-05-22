@@ -21,9 +21,9 @@ int main()
     srand(time(0));
     for (int i = 0; i < SIZE; ++i)
     {
-        v1[i] = rand() % 10000;
-        v2[i] = rand() % 10000;
-        v3[i] = rand() % 10000;  
+        v1[i] = rand() % 10000 - 5000;
+        v2[i] = rand() % 10000 - 5000;
+        v3[i] = rand() % 10000 - 5000;  
     }   
 
     cout << "v1: ";
@@ -32,9 +32,10 @@ int main()
     cout << "v2: ";
     print_arr(v2, step);
     cout << endl << endl;
-	cout << "v3: ";
+    cout << "v3: ";
     print_arr(v3, step);
-    cout << endl << endl;
+    cout << endl;
+    cout << "v3.size() = " << v3.size() << endl << endl;
     
     cout << "===========================================================" << endl;
 
@@ -63,6 +64,7 @@ int main()
     cout << "v3: ";
     print_arr(v3, step);
     cout << endl;
+    cout << "v3.size() = " << v3.size() << endl;
 
     return 0;
 }

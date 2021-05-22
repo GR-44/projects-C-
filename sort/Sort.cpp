@@ -225,19 +225,36 @@ void Sort::bubblesort(std::vector<int>& v)                   // bubble sort
     }
 }
 
-void Sort::sortX(vector<int>& v)      // sorting positive integers ONLY!!!
+void Sort::sortX(vector<int>& v)      // sorting integers ONLY!!!
 {
     Timer t;
 
     int count = max_num(v);
+    int count_neg = min_num(v);
     vector<int> temp(count + 1);
+    vector<int> temp_neg(-count_neg + 1);
 
     for (int i = 0; i < v.size(); ++i)
     {
-        ++temp[v[i]];
+        if (v[i] < 0)
+            ++temp_neg[-v[i]];
+        else
+            ++temp[v[i]];
     }
 
     int x = 0;
+
+    for (int i = temp_neg.size() - 1; i > 0; --i)
+    {
+        if (temp_neg[i] > 0)
+        {
+            while (temp_neg[i] > 0)
+            {
+                v[x++] = -i;
+                --temp_neg[i];
+            }
+        }
+    }
     for (int i = 0; i < temp.size(); ++i)
     {
         if (temp[i] > 0)
