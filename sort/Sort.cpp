@@ -58,7 +58,7 @@ void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
     }
 
     // ======================= sorting negative numbers ================================
-    // create two-dimentional array
+    // create two-dimensional array
     vector<vector<int>> neg_nums(10);
     for (int i = 0; i < 10; ++i)
     {
@@ -67,7 +67,7 @@ void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
             neg_nums[i][j] = 0;
     }
 
-    // define min nagative integer
+    // define min negative integer
     int min_number = min_num(neg);
 
     // define a count of positions of negative integer
@@ -88,7 +88,7 @@ void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
         num = 0;
         for (int i = 0; i < neg.size(); ++i)
         {
-            sum = pow(10, step);                                                
+            sum = pow(10, step);
             index = abs(neg[i]) % sum / pow(10, div_step);
             neg_nums[index][j++] = neg[i];
         }
@@ -134,7 +134,7 @@ void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
         num = 0;
         for (int i = 0; i < pos.size(); i++)
         {
-            sum = pow(10, step);                     
+            sum = pow(10, step);
             index = pos[i] % sum / pow(10, div_step);
             pos_nums[index][j++] = pos[i];
         }
@@ -154,7 +154,7 @@ void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
         }
     }
 
-    // join sorted negative and sorted positive integers in origin array 
+    // join sorted negative and sorted positive integers in origin array
     num = 0;
     for (int i = neg.size() - 1; i >= 0; i--)
     {
@@ -209,7 +209,7 @@ int Sort::max_num(std::vector<int>& v)                   // define max positive 
 void Sort::bubblesort(std::vector<int>& v)                   // bubble sort
 {
     Timer t;
-    
+
     int i, j, temp;
     for (i = 0; i < v.size(); i++)
     {
@@ -220,6 +220,32 @@ void Sort::bubblesort(std::vector<int>& v)                   // bubble sort
                 temp = v[j];
                 v[j] = v[j + 1];
                 v[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void Sort::sortX(vector<int>& v)      // sorting positive integers ONLY!!!
+{
+    Timer t;
+
+    int count = max_num(v);
+    vector<int> temp(count + 1);
+
+    for (int i = 0; i < v.size(); ++i)
+    {
+        ++temp[v[i]];
+    }
+
+    int x = 0;
+    for (int i = 0; i < temp.size(); ++i)
+    {
+        if (temp[i] > 0)
+        {
+            while (temp[i] > 0)
+            {
+                v[x++] = i;
+                --temp[i];
             }
         }
     }

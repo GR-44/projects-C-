@@ -12,15 +12,18 @@ void print_arr(vector<int>& v, int x)
 
 int main()
 {
-    vector<int> v1;
-    vector<int> v2;
+    const int SIZE = 100000;
+    vector<int> v1(SIZE);
+    vector<int> v2(SIZE);
+    vector<int> v3(SIZE);
     int step = 500;
 
     srand(time(0));
-    for (int i = 0; i < 100000; ++i)
+    for (int i = 0; i < SIZE; ++i)
     {
-        v1.push_back(rand() % 10000 - 5000);
-        v2.push_back(rand() % 10000 - 5000);
+        v1[i] = rand() % 10000;
+        v2[i] = rand() % 10000;
+        v3[i] = rand() % 10000;  
     }   
 
     cout << "v1: ";
@@ -33,14 +36,18 @@ int main()
     cout << "===========================================================" << endl;
 
     Sort a;
-    // bucketsort and calculation of runtime 
+    // block sorting and calculation of runtime 
     a.bucketsort(v1);
-    // quicksort and calculation of runtime
+
+    // bubble sorting and calculation of runtime
     {
         Timer t;
         a.quicksort(v2, 0, v2.size());
     }
-    
+
+    // sortX and calculation of runtime
+    a.sortX(v3);
+
     cout << "===========================================================" << endl;
     cout << endl;
 
@@ -49,8 +56,10 @@ int main()
     cout << endl << endl;
     cout << "v2: ";
     print_arr(v2, step);
+    cout << endl << endl;
+    cout << "v3: ";
+    print_arr(v3, step);
     cout << endl;
-
 
     return 0;
 }

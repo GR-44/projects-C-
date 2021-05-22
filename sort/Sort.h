@@ -6,6 +6,7 @@ class Sort
 public:
 	void quicksort(std::vector<int>& arr, int low, int high);
 	void bucketsort(std::vector<int>& v);
+	void sortX(std::vector<int>& v);
 	void bubblesort(std::vector<int>& v);
 
 private:
