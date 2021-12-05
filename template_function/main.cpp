@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-#include "Sort.h"
+#include "Template_func.h"
 
 int main()
 {

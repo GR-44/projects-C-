@@ -1,5 +1,5 @@
-#ifndef SORT_H
-#define SORT_H
+#ifndef TEMPLATE_FUNC_H
+#define TEMPLATE_FUNC_H
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -24,7 +24,7 @@ int print_arr(const vector<T>& v, int low_subscript, int high_subscript)   // te
 }
 
 template <typename T>
-void bubble_sort(vector<T>& v)      // template bubble sort  
+void bubble_sort(vector<T>& v)      // template bubble sort
 {
     int pass;
     int j;

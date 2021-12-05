@@ -19,7 +19,20 @@ Ticket::~Ticket() {}
 string Ticket::check_str(const string& s)
 {
 	string temp = "";
+<<<<<<< HEAD
 	return s.length() < 25 ? temp + s : temp.append(s, 0, 25);
+=======
+	if (s.length() < 25)
+		return s;
+	else
+	{
+		for (int i = 0; i < 25; ++i)
+		{
+			temp += s[i];
+		}
+	}
+	return temp;
+>>>>>>> 15f050ffca579ed5330f66f2aa545d4e8cc097cc
 }
 
 void Ticket::setFirstName(const string& s)
@@ -99,23 +112,5 @@ int Ticket::checkYear(int year)const
 		year = 1900;
 	return year;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

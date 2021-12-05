@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include "Sort.h"
+#include "time_calculation.h"
 using namespace std;
 
 void print_arr(vector<int>& v, int x)
@@ -11,41 +12,59 @@ void print_arr(vector<int>& v, int x)
 
 int main()
 {
-    vector<int> v1;
-    vector<int> v2;
+    const int SIZE = 100000;
+    vector<int> v1(SIZE);
+    vector<int> v2(SIZE);
+    vector<int> v3(SIZE);
     int step = 500;
 
     srand(time(0));
-    for (int i = 0; i < 10000; ++i)
+    for (int i = 0; i < SIZE; ++i)
     {
-        v1.push_back(rand() % 1000 - 500);
-        v2.push_back(rand() % 1000 - 500);
+        v1[i] = rand() % 10000 - 5000;
+        v2[i] = rand() % 10000 - 5000;
+        v3[i] = rand() % 10000 - 5000;  
     }   
 
     cout << "v1: ";
     print_arr(v1, step);
-    cout << endl;
+    cout << endl << endl;
     cout << "v2: ";
     print_arr(v2, step);
+    cout << endl << endl;
+    cout << "v3: ";
+    print_arr(v3, step);
     cout << endl;
+    cout << "v3.size() = " << v3.size() << endl << endl;
     
     cout << "===========================================================" << endl;
 
     Sort a;
     // block sorting and calculation of runtime 
-    a.block_sort(v1);
+    a.bucketsort(v1);
+
     // bubble sorting and calculation of runtime
-    a.bubble_sort(v2);
+    {
+        Timer t;
+        a.quicksort(v2, 0, v2.size());
+    }
+
+    // sortX and calculation of runtime
+    a.sortX(v3);
+
     cout << "===========================================================" << endl;
     cout << endl;
 
     cout << "v1: ";
     print_arr(v1, step);
-    cout << endl;
+    cout << endl << endl;
     cout << "v2: ";
     print_arr(v2, step);
+    cout << endl << endl;
+    cout << "v3: ";
+    print_arr(v3, step);
     cout << endl;
-
+    cout << "v3.size() = " << v3.size() << endl;
 
     return 0;
 }

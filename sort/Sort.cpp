@@ -3,7 +3,47 @@
 #include "time_calculation.h"
 using namespace std;
 
-void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
+void Sort::quicksort(vector<int>& arr, int low, int high)
+{
+    int i = low;
+    int j = high - 1;
+    int temp;
+    do
+    {
+        while (j > i)
+        {
+            if (arr[i] > arr[j])
+            {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                ++i;
+                break;
+            }
+            --j;
+        }
+        while (i < j)
+        {
+            if (arr[i] > arr[j])
+            {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                --j;
+                break;
+            }
+            ++i;
+        }
+    } while (i < j);
+
+    if (i < high - 1)
+        quicksort(arr, i + 1, high);
+    if (low < j - 1)
+        quicksort(arr, low, j);
+
+}
+
+void Sort::bucketsort(vector<int>& v)     // bucketsort - only for INTEGERS!!!
 {
     Timer t;
     // create 2 arrays for negative and positive integers of origin array
@@ -18,10 +58,16 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
     }
 
     // ======================= sorting negative numbers ================================
-    // create two-dimentional array
-    vector<vector<int>> neg_nums(10, vector<int>(neg.size(), 0));
+    // create two-dimensional array
+    vector<vector<int>> neg_nums(10);
+    for (int i = 0; i < 10; ++i)
+    {
+        neg_nums[i].resize(neg.size());
+        for (int j = 0; j < neg.size(); ++j)
+            neg_nums[i][j] = 0;
+    }
 
-    // define min nagative integer
+    // define min negative integer
     int min_number = min_num(neg);
 
     // define a count of positions of negative integer
@@ -42,7 +88,7 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
         num = 0;
         for (int i = 0; i < neg.size(); ++i)
         {
-            sum = pow(10, step);                                                
+            sum = pow(10, step);
             index = abs(neg[i]) % sum / pow(10, div_step);
             neg_nums[index][j++] = neg[i];
         }
@@ -64,8 +110,14 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
 
     //================================= sorting positive numbers ==============================================
     // create two-dimentional array
-    vector<vector<int>> pos_nums(10, vector<int>(pos.size(), -1));
-   
+    vector<vector<int>> pos_nums(10);
+    for (int i = 0; i < 10; ++i)
+    {
+        pos_nums[i].resize(pos.size());
+        for (int j = 0; j < pos.size(); ++j)
+            pos_nums[i][j] = -1;
+    }
+
     // define max positive integer
     int max_number = max_num(pos);
 
@@ -82,7 +134,7 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
         num = 0;
         for (int i = 0; i < pos.size(); i++)
         {
-            sum = pow(10, step);                     
+            sum = pow(10, step);
             index = pos[i] % sum / pow(10, div_step);
             pos_nums[index][j++] = pos[i];
         }
@@ -102,7 +154,7 @@ void Sort::block_sort(vector<int>& v)     // block sort - only for INTEGERS!!!
         }
     }
 
-    // join sorted negative and sorted positive integers in origin array 
+    // join sorted negative and sorted positive integers in origin array
     num = 0;
     for (int i = neg.size() - 1; i >= 0; i--)
     {
@@ -154,10 +206,10 @@ int Sort::max_num(std::vector<int>& v)                   // define max positive 
     return max_number;
 }
 
-void Sort::bubble_sort(std::vector<int>& v)                   // bubble sort
+void Sort::bubblesort(std::vector<int>& v)                   // bubble sort
 {
     Timer t;
-    
+
     int i, j, temp;
     for (i = 0; i < v.size(); i++)
     {
@@ -168,6 +220,49 @@ void Sort::bubble_sort(std::vector<int>& v)                   // bubble sort
                 temp = v[j];
                 v[j] = v[j + 1];
                 v[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void Sort::sortX(vector<int>& v)      // sorting integers ONLY!!!
+{
+    Timer t;
+
+    int count = max_num(v);
+    int count_neg = min_num(v);
+    vector<int> temp(count + 1);
+    vector<int> temp_neg(-count_neg + 1);
+
+    for (int i = 0; i < v.size(); ++i)
+    {
+        if (v[i] < 0)
+            ++temp_neg[-v[i]];
+        else
+            ++temp[v[i]];
+    }
+
+    int x = 0;
+
+    for (int i = temp_neg.size() - 1; i > 0; --i)
+    {
+        if (temp_neg[i] > 0)
+        {
+            while (temp_neg[i] > 0)
+            {
+                v[x++] = -i;
+                --temp_neg[i];
+            }
+        }
+    }
+    for (int i = 0; i < temp.size(); ++i)
+    {
+        if (temp[i] > 0)
+        {
+            while (temp[i] > 0)
+            {
+                v[x++] = i;
+                --temp[i];
             }
         }
     }
