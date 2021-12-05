@@ -156,7 +156,7 @@ void Menu::menu_vacant_seat(string ticket_class)const
 			}
 			f.close();
 		}
-
+		
 		if (ticket_class == "econom")
 		{
 			cout << "================ VACANT SEATS ECONOM ===============\n";
@@ -196,7 +196,7 @@ int Menu::check_input_seat_business()const
 		cout << "Your choice: ";
 		getchar();
 	}
-	return choice;
+	return choice;	
 }
 
 int Menu::check_input_seat_econom()const
@@ -300,7 +300,7 @@ bool Menu::is_Busy(int choice)const
 	{
 		int seat;
 		place vacant = BUSY;
-
+	
 		f.seekp(choice * 2);
 		f >> seat;
 
@@ -355,7 +355,3 @@ void Menu::nextFlight()const
 	cout << endl;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 15f050ffca579ed5330f66f2aa545d4e8cc097cc

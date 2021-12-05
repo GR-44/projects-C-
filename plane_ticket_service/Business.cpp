@@ -35,7 +35,7 @@ void Business::setSeat(int choice)
         {
             f.close();
         }
-
+            
     }
 }
 
@@ -64,13 +64,13 @@ bool Business::checkSeat(int choice)
 
         if (seat == VACANT)
         {
-            f.close();
             return true;
+            f.close();
         }
         else
         {
-            f.close();
             return false;
+            f.close();
         }
     }
 }
