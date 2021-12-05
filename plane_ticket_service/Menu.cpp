@@ -1,10 +1,9 @@
 #include <iostream>
 #include <fstream>
-using std::cout;
-using std::endl;
-using std::fstream;
+using namespace std;
 
 #include "Menu.h"
+#include "Business.h"
 
 void Menu::logo()
 {
@@ -23,6 +22,111 @@ void Menu::main_menu()const
 	cout << "Your choice: ";
 }
 
+Business Menu::input_data_business()const
+{
+	Menu menu;
+	string first, last;
+	int day, month, year;
+	cout << "Enter your first name: ";
+	cin >> first;
+	cout << "Enter your last name: ";
+	cin >> last;
+	cout << "Enter your birthdate(format: dd/mm/yyyy): ";
+	scanf_s("%d%*c%d%*c%d", &day, &month, &year);
+
+	Business business(first, last, day, month, year);
+	cout << "Choose your seat: ";
+	int seat;
+	while (true)
+	{
+		seat = menu.check_input_seat_business();
+		if (!menu.is_Busy(seat))
+			break;
+		else
+		{
+			cout << "This seat is already busy!\n";
+			cout << "Please, choose another seat: ";
+		}
+	}
+	business.setSeat(seat);
+	return business;
+}
+
+Econom Menu::input_data_econom()const
+{
+	Menu menu;
+	string first, last;
+	int day, month, year;
+	cout << "Enter your first name: ";
+	cin >> first;
+	cout << "Enter your last name: ";
+	cin >> last;
+	cout << "Enter your birthdate(format: dd/mm/yyyy): ";
+	scanf_s("%d%*c%d%*c%d", &day, &month, &year);
+
+	Econom econom(first, last, day, month, year);
+	cout << "Choose your seat: ";
+	int seat;
+	while (true)
+	{
+		seat = menu.check_input_seat_econom();
+		if (!menu.is_Busy(seat))
+			break;
+		else
+		{
+			cout << "This seat is already busy!\n";
+			cout << "Please, choose another seat: ";
+		}
+	}
+	econom.setSeat(seat);
+	return econom;
+}
+
+bool Menu::check_full_business()const
+{
+	Menu menu;
+	if (!menu.checkFullFill("business"))
+		menu.menu_vacant_seat("business");
+	else
+	{
+		menu.fullfilled_business();
+		cout << "Would you like to buy Econom Class ticket?\n";
+		cout << "Enter 1 to buy or 2 to exit.\n";
+		cout << "Your choice: ";
+		int alternative = menu.check_alternative_choice();
+		if (alternative == 1)
+			return false;
+		else
+		{
+			system("cls");
+			menu.nextFlight();
+		}
+	}
+	return true;
+}
+
+bool Menu::check_full_econom()const
+{
+	Menu menu;
+	if (!menu.checkFullFill("econom"))
+		menu.menu_vacant_seat("econom");
+	else
+	{
+		menu.fullfilled_econom();
+		cout << "Would you like to buy First Class ticket?\n";
+		cout << "Enter 1 to buy or 2 to exit.\n";
+		cout << "Your choice: ";
+		int alternative = menu.check_alternative_choice();
+		if (alternative == 1)
+			return false;
+		else
+		{
+			system("cls");
+			menu.nextFlight();
+		}
+	}
+}
+
 void Menu::menu_vacant_seat(string ticket_class)const
 {
 	fstream f;
@@ -37,9 +141,10 @@ void Menu::menu_vacant_seat(string ticket_class)const
 		place vacant = VACANT;
 
 		int seat;
-		cout << "================VACANT SEATS===============\n";
+		
 		if (ticket_class == "business")
 		{
+			cout << "================ VACANT SEATS BUSINESS ===============\n";
 			for (int i = 2; i < 11; i+=2)
 			{
 				f.seekp(i);
@@ -54,6 +159,7 @@ void Menu::menu_vacant_seat(string ticket_class)const
 		
 		if (ticket_class == "econom")
 		{
+			cout << "================ VACANT SEATS ECONOM ===============\n";
 			for (int i = 12; i < 21; i+=2)
 			{
 				f.seekp(i);
@@ -132,13 +238,13 @@ bool Menu::checkFullFill(string class_ticket) const
 
 			if (check_fill_seats == 5)
 			{
-				f.close();
 				return true;
+				f.close();
 			}
 			else
 			{
-				f.close();
 				return false;
+				f.close();
 			}
 		}
 	}
@@ -168,19 +274,19 @@ bool Menu::checkFullFill(string class_ticket) const
 
 			if (check_fill_seats == 5)
 			{
-				f.close();
 				return true;
+				f.close();
 			}
 			else
 			{
-				f.close();
 				return false;
+				f.close();
 			}
 		}
 	}
 }
 
-bool Menu::is_Busy(int choice)
+bool Menu::is_Busy(int choice)const
 {
 	fstream f;
 	f.open("tickets.txt", fstream::in);
@@ -200,23 +306,32 @@ bool Menu::is_Busy(int choice)
 
 		if (seat == BUSY)
 		{
-			f.close();
 			return true;
+			f.close();
 		}
 		else
 		{
-			f.close();
 			return false;
+			f.close();
 		}
 	}
 }
 
-void Menu::fullfilled()const
+void Menu::fullfilled_business()const
 {
 	cout << endl;
-	cout << "****************************************\n";
-	cout << "********** ALL SEATS ARE SOLD! *********\n";
-	cout << "****************************************\n";
+	cout << "*********************************************************\n";
+	cout << "********** ALL BUSINESS CLASS TICKETS ARE SOLD! *********\n";
+	cout << "*********************************************************\n";
+	cout << endl;
+}
+
+void Menu::fullfilled_econom()const
+{
+	cout << endl;
+	cout << "*******************************************************\n";
+	cout << "********** ALL ECONOM CLASS TICKETS ARE SOLD! *********\n";
+	cout << "*******************************************************\n";
 	cout << endl;
 }
 
@@ -239,24 +354,4 @@ void Menu::nextFlight()const
 	cout << "*******************************************\n";
 	cout << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

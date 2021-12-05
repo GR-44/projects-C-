@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <fstream>
 #include <ctime>
+#include <string>
 using namespace std;
 
 #include "Ticket.h"
@@ -18,16 +19,7 @@ Ticket::~Ticket() {}
 string Ticket::check_str(const string& s)
 {
 	string temp = "";
-	if (s.length() < 25)
-		temp += s;
-	else
-	{
-		for (int i = 0; i < 25; ++i)
-		{
-			temp += s[i];
-		}
-	}
-	return temp;
+	return s.length() < 25 ? temp + s : temp.append(s, 0, 25);
 }
 
 void Ticket::setFirstName(const string& s)

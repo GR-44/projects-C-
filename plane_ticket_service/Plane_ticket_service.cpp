@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <string>
+#include <cctype>
 using namespace std;
 
 #include "Ticket.h"
@@ -9,12 +10,12 @@ using namespace std;
 
 int main()
 {
-    Menu m;
-    m.logo();
-    m.main_menu();
+    Menu menu;
+    menu.logo();
+    menu.main_menu();
 
-    bool flag;
-    int choice = m.check_input_choice();
+    bool flag = true;
+    int choice = menu.check_input_choice();
     
     while (choice != 3)
     {
@@ -24,56 +25,20 @@ int main()
             {
                 flag = true;
                 system("cls");
-                if (!m.checkFullFill("business"))
-                    m.menu_vacant_seat("business");
+                
+                if (!menu.check_full_business())
+                {
+                    flag = false;
+                    choice = 2;
+                    break;
+                }
                 else
-                {
-                    m.fullfilled();
-                    cout << "Would you like to buy Econom Class ticket?\n";
-                    cout << "Enter 1 to buy or 2 to exit.\n";
-                    cout << "Your choice: ";
-                    int alternative = m.check_alternative_choice();
-                    if (alternative == 1)
-                    {
-                        choice = 2;
-                        flag = false;
-                        break;
-                    }
-                    else
-                    {
-                        system("cls");
-                        m.nextFlight();
-                        break;
-                    }
-                }
+                    break;
 
-                string first, last;
-                int day, month, year;
-                cout << "Enter your first name: ";
-                cin >> first;
-                cout << "Enter your last name: ";
-                cin >> last;
-                cout << "Enter your birthdate(format: dd/mm/yyyy): ";
-                scanf_s("%d%*c%d%*c%d", &day, &month, &year);
-
-                Business b(first, last, day, month, year);
-                cout << "Choose your seat: ";
-                int seat; 
-                while (true)
-                {
-                    seat = m.check_input_seat_business();
-                    if (!m.is_Busy(seat))
-                        break;
-                    else
-                    {
-                        cout << "This seat is already busy!\n";
-                        cout << "Please, choose another seat: ";
-                    }
-                }
-                b.setSeat(seat);
+                Business business = menu.input_data_business();
 
                 system("cls");
-                b.printBusinessClassTicket();
+                business.printBusinessClassTicket();
                 cout << endl;
                 break;
             }
@@ -82,56 +47,20 @@ int main()
             {
                 flag = true;
                 system("cls");
-                if (!m.checkFullFill("econom"))
-                    m.menu_vacant_seat("econom");
+                
+                if (!menu.check_full_econom())
+                {
+                    flag = false;
+                    choice = 1;
+                    break;
+                }
                 else
-                {
-                    m.fullfilled();
-                    cout << "Would you like to buy First Class ticket?\n";
-                    cout << "Enter 1 to buy or 2 to exit.\n";
-                    cout << "Your choice: ";
-                    int alternative = m.check_alternative_choice();
-                    if (alternative == 1)
-                    {
-                        choice = 1;
-                        flag = false;
-                        break;
-                    }
-                    else
-                    {
-                        system("cls");
-                        m.nextFlight();
-                        break;
-                    }
-                }
+                    break;
 
-                string first, last;
-                int day, month, year;
-                cout << "Enter your first name: ";
-                cin >> first;
-                cout << "Enter your last name: ";
-                cin >> last;
-                cout << "Enter your birthdate(format: dd/mm/yyyy): ";
-                scanf_s("%d%*c%d%*c%d", &day, &month, &year);
-
-                Econom e(first, last, day, month, year);
-                cout << "Choose your seat: ";
-                int seat;
-                while (true)
-                {
-                    seat = m.check_input_seat_econom();
-                    if (!m.is_Busy(seat))
-                        break;
-                    else
-                    {
-                        cout << "This seat is already busy!\n";
-                        cout << "Please, choose another seat: ";
-                    }
-                }
-                e.setSeat(seat);
+                Econom econom = menu.input_data_econom();
 
                 system("cls");
-                e.printEconomClassTicket();
+                econom.printEconomClassTicket();
                 cout << endl;
                 break;
             }
@@ -143,8 +72,8 @@ int main()
 
         if (flag)
         {
-            m.main_menu();
-            choice = m.check_input_choice();
+            menu.main_menu();
+            choice = menu.check_input_choice();
         }
     }
 
